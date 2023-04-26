@@ -3,11 +3,11 @@
   <div class="sidebar-menu" id="sidebar-menu">
     <ul>
       <li class="menu-title">Main</li>
-      <li class="active">
+      <li class="{{ url()->current() == route('dashboard') ? 'active' : '' }}">
         <a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a>
       </li>
-      <li class="">
-        <a href="#"><i class="fa fa-user-md"></i> Doctors</a>
+      <li class="{{ url()->current() == route('doctors.index') ? 'active' : '' }}">
+        <a href="{{route('doctors.index')}}"><i class="fa fa-user-md"></i> Doctors</a>
       </li>
       <li class="">
         <a href="#"><i class="fa fa-list"></i> Departments</a>

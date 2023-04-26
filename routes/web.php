@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\DoctorsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,6 @@ Route::prefix('dashboard')->group(function () {
 
   Route::prefix('/')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('doctors', DoctorsController::class);
   });
 });
