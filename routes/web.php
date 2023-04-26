@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\DoctorsController;
 use App\Http\Controllers\Dashboard\DepartmentController;
 
@@ -22,7 +23,17 @@ Route::prefix('dashboard')->group(function () {
 
   Route::prefix('/')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('doctors', DoctorsController::class);
-    Route::resource('departments', DepartmentController::class);
+
+    Route::prefix('profile')->group(function () {
+      Route::get('/', [ProfileController::class, 'index'])->name('profile');
+      Route::get('edit', [ProfileController::class, 'edit'])->name('profile.edit');
+      Route::post('update', [ProfileController::class, 'update'])->name('profile.update');
+      Route::get('edit-password', [ProfileController::class, 'edit_password'])->name('profile.edit_password');
+      Route::post('update-password', [ProfileController::class, 'update_password'])->name('profile.update_password');
+    });
+
+    Route::resource('doctors', DoctorsController::class)->middleware('checkAdmin');
+
+    Route::resource('departments', DepartmentController::class)->middleware('checkAdmin');
   });
 });

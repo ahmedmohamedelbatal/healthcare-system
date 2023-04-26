@@ -50,14 +50,18 @@
     <li class="nav-item dropdown has-arrow">
       <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown" aria-expanded="false">
         <span class="user-img">
-          <img class="rounded-circle" src="{{asset('assets/images/user.jpg')}}" alt="admin-img" width="24" />
+          @if (Auth::user()->image)
+            <img class="rounded-circle" src="{{asset('images/'.Auth::user()->image)}}" alt="admin-img" width="24" />
+          @else
+            <img class="rounded-circle" src="{{asset('assets/images/user.jpg')}}" alt="admin-img" width="24" />
+          @endif
           <span class="status online"></span>
         </span>
-        <span>Ahmed Elbatal</span>
+        <span>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
       </a>
       <div class="dropdown-menu" x-placement="bottom-start">
-        <a class="dropdown-item" href="#">My Profile</a>
-        <a class="dropdown-item" href="#">Edit Profile</a>
+        <a class="dropdown-item" href="{{route('profile')}}">My Profile</a>
+        <a class="dropdown-item" href="{{route('profile.edit')}}">Edit Profile</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item btn" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> Logout </a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
@@ -71,8 +75,8 @@
   <div class="dropdown mobile-user-menu float-right">
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
     <div class="dropdown-menu" x-placement="bottom-start">
-      <a class="dropdown-item" href="#">My Profile</a>
-      <a class="dropdown-item" href="#">Edit Profile</a>
+      <a class="dropdown-item" href="{{route('profile')}}">My Profile</a>
+      <a class="dropdown-item" href="{{route('profile.edit')}}">Edit Profile</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item btn" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> Logout </a>
       <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>

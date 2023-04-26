@@ -37,7 +37,7 @@ class DoctorsController extends Controller
 
     if ($request->hasFile('image')) {
       $image = $request->file('image')->getClientOriginalName();
-      $path = $request->file('image')->storeAs('doctors', $image, 'public_path');
+      $path = $request->file('image')->storeAs('profiles', $image, 'public_path');
     } else {
       $path = null;
     }
