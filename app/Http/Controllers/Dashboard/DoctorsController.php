@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,8 @@ class DoctorsController extends Controller
   }
 
   public function create() {
-    return view('dashboard.admin.doctors.create');
+    $departments = Department::all();
+    return view('dashboard.admin.doctors.create', compact('departments'));
   }
 
   public function store(Request $request) {
@@ -27,6 +29,7 @@ class DoctorsController extends Controller
       'job' => 'required',
       'address' => 'required',
       'phone_number' => 'required|numeric',
+      'department_id' => 'required',
       'gender' => 'required',
       'date_of_birth' => 'required|date',
       'image' => 'image',
@@ -48,6 +51,7 @@ class DoctorsController extends Controller
       'job' => $request->job,
       'address' => $request->address,
       'phone_number' => $request->phone_number,
+      'department_id' => $request->department_id,
       'gender' => $request->gender,
       'date_of_birth' => $request->date_of_birth,
       'biography' => $request->biography,

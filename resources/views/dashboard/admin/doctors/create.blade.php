@@ -54,6 +54,18 @@
             </div>
             <div class="col-sm-6">
               <div class="form-group">
+                <label>Department <span class="text-danger">*</span></label>
+                <select class="form-control @error('department_id') is-invalid @enderror" name="department_id">
+                  <option selected disabled value>-- Select Department --</option>
+                  @foreach ($departments as $department)
+                  <option value="{{$department->id}}">{{$department->department_name}}</option>
+                  @endforeach
+                </select>
+                @error('department_id') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span> @enderror
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
                 <label>Date of Birth <span class="text-danger">*</span></label>
                 <input type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" />
                 @error('date_of_birth') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span> @enderror
@@ -90,7 +102,7 @@
                 @error('address') <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span> @enderror
               </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-6">
               <div class="form-group">
                 <label>Image</label>
                 <div class="profile-upload">

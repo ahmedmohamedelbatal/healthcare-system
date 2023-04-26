@@ -64,6 +64,11 @@
                       <span class="title">Gender:</span>
                       <span class="text">{{$doctor->gender}}</span>
                     </li>
+                    
+                    <li>
+                      <span class="title">Department:</span>
+                      <span class="badge badge-pill badge-success">{{$doctor->department->department_name}}</span>
+                    </li>
                   </ul>
                 </div>
               </div>

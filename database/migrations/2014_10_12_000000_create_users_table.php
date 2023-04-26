@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('job')->default('not found');
             $table->string('address')->default('not found');
             $table->string('phone_number', 12)->default(0);
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->enum('gender', ['Male', 'Female']);
             $table->date('date_of_birth')->nullable();
             $table->text('biography')->nullable();
